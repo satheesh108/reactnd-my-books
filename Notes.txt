@@ -1,0 +1,27 @@
+Curr reading - state.bookCurrentlyReading
+Want to Read - state.bookShelfWantToRead
+Read - state.bookShelfWantToRead
+
+1. Initial reder?
+Launsh the UI Tiles/Tabs and put the loading icon (loading...)
+call the api - getAll().then({
+ //update the state
+})
+
+state = {
+  bookCurrentlyReading : [],
+  bookShelfWantToRead : [],		
+  bookShelRead : []
+}
+
+
+2. How the update should happen?
+
+if "Want to Read" is selected then update the state.Array of below
+methode - moveToWantToRead(book)
+Want to Read - state.bookShelfWantToRead
+
+
+if "Read" is selected then update the state.books of below
+methode - moveToWantToRead(book)
+Want to Read - state.books
