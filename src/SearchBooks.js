@@ -10,9 +10,17 @@ class SearchBooks extends Component{
     console.log(book);
     BooksAPI.search(book.trim()).then((books) => {
     this.setState({books})
-    //console.log(books)
+    console.log(books)
     })
   }
+  // moveToShelf = (book, shelf) => {
+  //       console.log("book is to be moved", book, shelf)
+  //       //this.setState({() => this.state.books[id]})
+  //       //this.state.books.filter((book) => (book.shelf.trim() === shelf.trim()))
+  //       BooksAPI.update(book,shelf).then((res) =>{
+  //         console.log("Book added", res);
+  //       })
+  // }
   render(){
     return (
       <div className="search-books">
@@ -31,6 +39,7 @@ class SearchBooks extends Component{
           {/*<ol className="books-grid"></ol>*/}
           <ListBooks
             books={this.state.books}
+            moveTo={(b,s) => this.props.moveTo(b,s)}
           />
         </div>
       </div>

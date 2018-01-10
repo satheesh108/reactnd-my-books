@@ -7,7 +7,9 @@ import SearchBooks from './SearchBooks';
 
 class BooksApp extends React.Component {
   state = {
-    books: []
+    books:[]
+    //{currentlyReading:[],read:[], wantToRead:[]}
+    //TODO - change the logic based on the above
   }
 
   componentDidMount(){
@@ -17,9 +19,21 @@ class BooksApp extends React.Component {
     })
   }
   moveToShelf = (book, shelf) => {
-        console.log("book is to be moved")
+        console.log("book is to be moved", book, shelf)
         //this.setState({() => this.state.books[id]})
-        //this.state.books.filter((book) => (book.shelf.trim() === shelf.trim()))
+        //this.state.books.filter((book) => (book.shelf.trim() === shelf.trim
+        BooksAPI.update(book,shelf).then((res) =>{
+          console.log("Book added", res)
+          let index = this.state.books.findIndex((b) => b.id === book)
+          let updatedBooks = this.state.books
+          updatedBooks[index].shelf = shelf
+          console.log("updatedBooks",updatedBooks)
+          //updatedBooks = res
+          //We need to do the above through setState using map /filter/reduce/whatever
+          this.setState({
+            //books:this.state.books.filter((b) => b.shelf != '')
+          })
+        })
   }
 
   render() {
@@ -30,6 +44,7 @@ class BooksApp extends React.Component {
             <Route path='/Search' render={ ({history}) => (
               <SearchBooks
                 closeSearch={ () => history.push('/')  }
+                moveTo={(id, selectedShelf) => this.moveToShelf(id, selectedShelf)}
               />
             )}/>
 
@@ -41,7 +56,7 @@ class BooksApp extends React.Component {
                   {shelfs.map((shelf)=>(
                     <ListBooks
                         key={shelf}
-                        books={this.state.books.filter((book) => (book.shelf.trim() === shelf.trim()))}
+                        books={this.state.books.filter((book) => (book.shelf === shelf))}
                         shelf={shelf}
                         addBook={() => this.setState({ showSearchPage: true })}
                         moveTo={(id, selectedShelf) => this.moveToShelf(id, selectedShelf)}/>
