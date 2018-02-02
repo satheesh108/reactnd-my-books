@@ -161,6 +161,10 @@ body, .app {
   cursor: pointer;
 }
 
+.book-shelf-selected {
+  background-color: yellow;
+}
+
 /* book cover */
 
 .book-cover {

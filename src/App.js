@@ -28,6 +28,7 @@ class BooksApp extends React.Component {
           let updatedBooks = this.state.books
           updatedBooks[index].shelf = shelf
           console.log("updatedBooks",updatedBooks)
+          //updatedBooksCorreWay = {...this.state,[]}
           //updatedBooks = res
           //We need to do the above through setState using map /filter/reduce/whatever
           this.setState({
@@ -58,6 +59,7 @@ class BooksApp extends React.Component {
                         key={shelf}
                         books={this.state.books.filter((book) => (book.shelf === shelf))}
                         shelf={shelf}
+                        shelves={shelfs}
                         addBook={() => this.setState({ showSearchPage: true })}
                         moveTo={(id, selectedShelf) => this.moveToShelf(id, selectedShelf)}/>
                   ))}
