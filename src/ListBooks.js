@@ -19,6 +19,7 @@ class ListBooks extends Component {
                             id={book.id}
                             currentShelf={book.shelf}
                             shelves={this.props.shelves}
+                            book={book}
                           />
                         </div>
                         <div className="book-title">{book.title}</div>
@@ -40,16 +41,24 @@ class ListBooks extends Component {
 
 class BookShelfChanger extends Component {
   render(){
-    let {moveTo, id, currentShelf, shelves} = this.props
+    let {moveTo, id, currentShelf, shelves, book} = this.props
+    console.log("book - moveTo", book);
     return (
       <div className="book-shelf-changer">
-        <select onChange={(event) => moveTo(id, event.target.value)}>
+        <select value={currentShelf} onChange={(event) => moveTo(id, event.target, book)}>
           <option value="none" disabled>Move to...</option>
-          {shelves.map((shelf) => (
-            <option value={shelf} className={(currentShelf === shelf)? 'book-shelf-selected' : ''}>{sentensise(shelf)}</option>
-          ))}
           <option value="none">None</option>
+          {shelves.map((shelf) => (
+            <option
+              key={shelf}
+              value={shelf}
+              selected={currentShelf === shelf}
+              >
+                {sentensise(shelf)}
+              </option>
+          ))}
         </select>
+        {/*className={(currentShelf === shelf)? 'book-shelf-selected': ''}*/}
       </div>
     )
   }
