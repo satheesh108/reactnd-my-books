@@ -42,10 +42,10 @@ class ListBooks extends Component {
 class BookShelfChanger extends Component {
   render(){
     let {moveTo, id, currentShelf, shelves, book} = this.props
-    console.log("book - moveTo", book);
+    //console.log("book - moveTo", JSON.stringify(book));
     return (
       <div className="book-shelf-changer">
-        <select value={currentShelf} onChange={(event) => moveTo(id, event.target, book)}>
+        <select value={currentShelf} onChange={(event) => moveTo(id, event.target.value, book)}>
           <option value="none" disabled>Move to...</option>
           <option value="none">None</option>
           {shelves.map((shelf) => (
