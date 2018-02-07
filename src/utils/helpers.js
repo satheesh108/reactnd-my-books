@@ -7,17 +7,23 @@ export function sentensise (str = '') {
 }
 
 //This function will return a flat array. This is used to copy the array
-export function updateBook(books, selectedBook) {
-    return books.map( (book, index) => {
-        if(index !== selectedBook.index) {
-            // This isn't the item we care about - keep it as-is
-            return book;
+export function updateBook(state, selectedBook, shelf, bookId) {
+  const {books} = state
+  let index = books.findIndex((b) => b.id === bookId)
+    //return (
+       if (!selectedBook) {
+          return books.map((book, i) => {
+              if(i !== index) {
+                return book
+              }
+              book.shelf = shelf
+              return {
+                book
+              }
+            })
+        } else {
+          selectedBook.shelf = shelf
+          return books.concat(selectedBook)
         }
-
-        // Otherwise, this is the one we want - return an updated value
-        return {
-            ...book,
-            ...selectedBook.shelf
-        }
-   })
+    //)
  }

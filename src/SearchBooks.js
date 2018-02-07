@@ -7,11 +7,9 @@ class SearchBooks extends Component{
       books: []
   }
   searchBooks = (book) => {
-    console.log(book);
     BooksAPI.search(book.trim()).then((books) => {
       if(books)
         this.setState({books})
-      console.log("searched books",books)
     })
   }
   // moveToShelf = (id, shelf, book) {

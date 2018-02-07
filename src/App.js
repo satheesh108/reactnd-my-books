@@ -4,6 +4,7 @@ import * as BooksAPI from './BooksAPI';
 import { Route } from 'react-router-dom';
 import './App.css';
 import SearchBooks from './SearchBooks';
+import { updateBook } from './utils/helpers'
 
 class BooksApp extends React.Component {
   state = {
@@ -19,33 +20,13 @@ class BooksApp extends React.Component {
     })
   }
 
-  moveToShelf = (bookId, shelf, book) => {
-        let updatedBook = null,
-            tempBooks = null,
-            index = null,
-            selectedBook = {};
+  moveToShelf = (bookId, shelf, selectedBook = null) => {
+      BooksAPI.update(bookId, shelf).then((res) =>{
 
-        console.log("book is to be moved", book, shelf)
-
-        BooksAPI.update(bookId,shelf).then((res) =>{
-          console.log("Book added", res)
-          tempBooks = this.state.books;
-          index = tempBooks.findIndex((b) => b.id === bookId)
-
-          book = book || false;
-          if(!book) {
-            updatedBook = [...tempBooks]
-            updatedBook[index].shelf = shelf
-          } else {
-            book.shelf = shelf
-            updatedBook = [...tempBooks, book]
-            //updatedBook.push(book);
-          }
-
-          this.setState({
-            books:updatedBook
-          })
+        this.setState({
+          books:updateBook(this.state, selectedBook, shelf,bookId)
         })
+      })
   }
 
   render() {
