@@ -22,7 +22,6 @@ class BooksApp extends React.Component {
 
   moveToShelf = (bookId, shelf, selectedBook = null) => {
       BooksAPI.update(bookId, shelf).then((res) =>{
-
         this.setState({
           books:updateBook(this.state, selectedBook, shelf,bookId)
         })
