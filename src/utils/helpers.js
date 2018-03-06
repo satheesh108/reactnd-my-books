@@ -18,8 +18,7 @@ export function updateBook(state, selectedBook, shelf, bookId) {
               }
               book.shelf = shelf
               return book
-                book
-            
+    
             })
         } else {
           selectedBook.shelf = shelf
